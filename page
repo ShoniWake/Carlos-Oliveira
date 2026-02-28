@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Quote Widget</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: Georgia, serif;
+      font-size: 24px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    #quote {
+      max-width: 900px;
+      position: relative;
+      margin-bottom: 60px;
+      line-height: 1.15;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000,
+         2px  2px 6px rgba(0,0,0,0.8);
+    }
+
+    #quote::before {
+      content: "“";
+      font-size: 40px;
+      vertical-align: top;
+    }
+
+    #quote::after {
+      content: "”";
+      font-size: 40px;
+      vertical-align: bottom;
+    }
+
+    #refresh-btn {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0,0,0,0.4);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.2s;
+    }
+
+    #refresh-btn:hover {
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    #refresh-btn::before {
+      content: "⟳";
+      color: white;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="quote">Loading...</div>
+<button id="refresh-btn"></button>
+
+<script>
+  const quotes = [
+    "... a mind needs books as a sword needs a whetstone, if it is to keep its edge.",
+    "Never forget what you are, for surely the world will not. Make it your strength. Then it can never be your weakness. Armour yourself in it, and it will never be used to hurt you.",
+    "Fear cuts deeper than swords.",
+    "Winter is coming.",
+    "When you play a game of thrones you win or you die.",
+    "When the snows fall and the white winds blow, the lone wolf dies but the pack survives."
+  ];
+
+  const backgrounds = [
+    "https://64.media.tumblr.com/ce1834e12202d4d19896d09fa7e624be/8895949654d84f4c-0e/s500x750/918d7be047aec391c2a346097c8bb0dea59ed465.jpg",
+"https://64.media.tumblr.com/f0a24c7b3245eb6f2811076774851155/8895949654d84f4c-dc/s1280x1920/338fdf13fc55b161e360540efd8f0b4915873b79.jpg",
+"https://64.media.tumblr.com/6379a3dabf784eae4e21e9c6769edb4e/8895949654d84f4c-df/s1280x1920/75de7ac0cb7c6faa0b5dd77dde6a240a4dbc9198.png",
+"https://64.media.tumblr.com/fb856505f070c90f26881afda56acc4f/8895949654d84f4c-1e/s1280x1920/fd1572336913971bac946f4b510e2b8a394b4533.jpg",
+"https://64.media.tumblr.com/04006d241192130462deb1ee7eb1b9f3/8895949654d84f4c-41/s400x600/cd394997d6576eeda07217d871129682020fd0bf.jpg",
+"https://64.media.tumblr.com/3f8bc84abac33dac0f6a813bd5128638/8895949654d84f4c-33/s1280x1920/cd4c25efa1c023298e3014e54219401d45da06bb.jpg",
+"https://64.media.tumblr.com/fae1a7c0a712ac33274008e6b73f415e/8895949654d84f4c-d3/s1280x1920/717acbc08cc2118dc99d4cdb7c0f9fb0982abe2a.jpg",
+"https://64.media.tumblr.com/55416699e79cada3e3aae389cea71ea4/8895949654d84f4c-87/s1280x1920/27173e07b344529273aa10277bf88ab836915169.jpg", 
+"https://64.media.tumblr.com/068cfc28b73d6d801fc29b05e5aec504/8895949654d84f4c-33/s1280x1920/f5a993e8c29b66e1cf85e4da451bab736dde5807.jpg",
+"https://64.media.tumblr.com/075b038f0ebd99dbb84d9071bfc5c62c/8895949654d84f4c-e3/s1280x1920/b714b9d66eb6ced3025cbdc9144aa1a6466ae8a0.jpg"
+  ];
+
+  function getRandomIndex(arr) {
+    return Math.floor(Math.random() * arr.length);
+  }
+
+  function setQuoteAndBackground() {
+    const quoteIndex = getRandomIndex(quotes);
+    const bgIndex = getRandomIndex(backgrounds);
+    document.getElementById('quote').innerText = quotes[quoteIndex];
+    document.body.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
+  }
+
+  setQuoteAndBackground();
+
+  document.getElementById('refresh-btn').addEventListener('click', setQuoteAndBackground);
+</script>
+
+</body>
+</html>
